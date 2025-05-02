@@ -9,13 +9,7 @@ import pickle
 random.seed()
 
 def main():
-    #setupData(30)
-    
-    
-    params = LSTMParams.from_arr([0.307777813226747, 0.3904958476912733, 0.9626740542136294, 0.45931241527424915, 0.6354211965871436])
-    print("evaluating params: ", params.hidden_size, params.num_layers, params.dropout, params.lr, params.epochs)
-    
-    #return
+    setupData(30)
     
     iters = 15
     
@@ -23,134 +17,134 @@ def main():
     
     
     #pso
-    #print("PSO")
-    #b, bst, pst = particleSwarmOptimisation(5, params, iters, lstm_fit)
-    #print("best found weights:", b)
-    #
-    ##saves data to file
-    #obj = (b, bst, pst)
-    #with open('data/PSO_DATA2.pkl', 'wb') as output:
-    #    pickle.dump(obj, output)
-    #
-    #
-    #with open('data/PSO_DATA2.pkl', 'rb') as pkl_file:
-    #    data = pickle.load(pkl_file)
-    #b=data[0]
-    #bst=data[1]
-    #pst=data[2]
-    #
-    #
-    #plt.figure(figsize=(10, 6))
-    #scx, scy = flatten_w_index(pst)
-    #plt.yscale('log')
-    #plt.scatter(scx, scy)
-    #plt.plot(np.arange(0,len(bst)), bst)
-    #
-    #lasty = ""
-    #for x,y in zip(np.arange(0,len(bst)), bst):
-    #    if y != lasty:
-    #        label = "{:.2f}".format(y)
-    #        lasty = y
-    #    else:
-    #        label = ""
-    #    plt.annotate(label, # this is the text
-    #                (x,y), # these are the coordinates to position the label
-    #                textcoords="offset points", # how to position the text
-    #                xytext=(0,10), # distance from text to points (x,y)
-    #                ha='center') # horizontal alignment can be left, right or center
-    #
-    #
-    #plt.title('PSO Fitness By Generation')
-    #plt.xlabel('Generation')
-    #plt.ylabel('Fitness')
-    #plt.savefig("img/pso_2.png")
-    #plt.show()
-    #print(min(bst))
+    print("PSO")
+    b, bst, pst = particleSwarmOptimisation(5, params, iters, lstm_fit)
+    print("best found weights:", b)
+    
+    #saves data to file
+    obj = (b, bst, pst)
+    with open('data/PSO_DATA_0.pkl', 'wb') as output:
+        pickle.dump(obj, output)
+    
+    
+    with open('data/PSO_DATA_0.pkl', 'rb') as pkl_file:
+        data = pickle.load(pkl_file)
+    b=data[0]
+    bst=data[1]
+    pst=data[2]
+    
+    
+    plt.figure(figsize=(10, 6))
+    scx, scy = flatten_w_index(pst)
+    plt.yscale('log')
+    plt.scatter(scx, scy)
+    plt.plot(np.arange(0,len(bst)), bst)
+    
+    lasty = ""
+    for x,y in zip(np.arange(0,len(bst)), bst):
+        if y != lasty:
+            label = "{:.2f}".format(y)
+            lasty = y
+        else:
+            label = ""
+        plt.annotate(label, # this is the text
+                    (x,y), # these are the coordinates to position the label
+                    textcoords="offset points", # how to position the text
+                    xytext=(0,10), # distance from text to points (x,y)
+                    ha='center') # horizontal alignment can be left, right or center
+    
+    
+    plt.title('PSO Fitness By Generation')
+    plt.xlabel('Generation')
+    plt.ylabel('Fitness')
+    plt.savefig("img/pso_0.png")
+    plt.show()
+    print(min(bst))
     
     
     #random search
-    #print("Random Search")
-    #b, bst, pst = randomSearch(5, iters * params.pop, lstm_fit)
-    #print("best found weights:", b)
-    #
-    ##saves data to file
-    #obj = (b, bst, pst)
-    #with open('data/RND_DATA2.pkl', 'wb') as output:
-    #    pickle.dump(obj, output)
-    #
-    #with open('data/RND_DATA2.pkl', 'rb') as pkl_file:
-    #    data = pickle.load(pkl_file)
-    #b=data[0]
-    #bst=data[1]
-    #pst=data[2]
-    #
-    #
-    #plt.figure(figsize=(10, 6))
-    #plt.scatter(np.arange(0,len(pst)), pst)
-    #plt.plot(np.arange(0,len(bst)), bst)
-    #plt.yscale('log')
-    #
-    #lasty = ""
-    #for x,y in zip(np.arange(0,len(bst)), bst):
-    #    if y != lasty:
-    #        label = "{:.2f}".format(y)
-    #        lasty = y
-    #    else:
-    #        label = ""
-    #    plt.annotate(label, # this is the text
-    #                (x,y), # these are the coordinates to position the label
-    #                textcoords="offset points", # how to position the text
-    #                xytext=(0,10), # distance from text to points (x,y)
-    #                ha='center') # horizontal alignment can be left, right or center
-    #
-    #plt.title('Random Search Fitness')
-    #plt.xlabel('Generation')
-    #plt.ylabel('Fitness')
-    #plt.savefig("img/rnd_2.png")
-    #plt.show()
-    #print(min(bst))
+    print("Random Search")
+    b, bst, pst = randomSearch(5, iters * params.pop, lstm_fit)
+    print("best found weights:", b)
+    
+    #saves data to file
+    obj = (b, bst, pst)
+    with open('data/RND_DATA_0.pkl', 'wb') as output:
+        pickle.dump(obj, output)
+    
+    with open('data/RND_DATA_0.pkl', 'rb') as pkl_file:
+        data = pickle.load(pkl_file)
+    b=data[0]
+    bst=data[1]
+    pst=data[2]
+    
+    
+    plt.figure(figsize=(10, 6))
+    plt.scatter(np.arange(0,len(pst)), pst)
+    plt.plot(np.arange(0,len(bst)), bst)
+    plt.yscale('log')
+    
+    lasty = ""
+    for x,y in zip(np.arange(0,len(bst)), bst):
+        if y != lasty:
+            label = "{:.2f}".format(y)
+            lasty = y
+        else:
+            label = ""
+        plt.annotate(label, # this is the text
+                    (x,y), # these are the coordinates to position the label
+                    textcoords="offset points", # how to position the text
+                    xytext=(0,10), # distance from text to points (x,y)
+                    ha='center') # horizontal alignment can be left, right or center
+    
+    plt.title('Random Search Fitness')
+    plt.xlabel('Generation')
+    plt.ylabel('Fitness')
+    plt.savefig("img/rnd_0.png")
+    plt.show()
+    print(min(bst))
     
     
     #stochastic hill climb
-    #print("Stochastic Hill Climber")
-    #b, bst, pst = hillClimb(5, iters * params.pop, lstm_fit)
-    #print("best found weights:", b)
-    #
-    ##saves data to file
-    #obj = (b, bst, pst)
-    #with open('data/SHC_DATA2.pkl', 'wb') as output:
-    #    pickle.dump(obj, output)
-    #  
-    #with open('data/SHC_DATA2.pkl', 'rb') as pkl_file:
-    #    data = pickle.load(pkl_file)
-    #b=data[0]
-    #bst=data[1]
-    #pst=data[2]
-    #
-    #plt.figure(figsize=(10, 6))
-    #plt.scatter(np.arange(0,len(pst)), pst)
-    #plt.plot(np.arange(0,len(bst)), bst)
-    #plt.yscale('log')
-    #
-    #lasty = ""
-    #for x,y in zip(np.arange(0,len(bst)), bst):
-    #    if y != lasty:
-    #        label = "{:.2f}".format(y)
-    #        lasty = y
-    #    else:
-    #        label = ""
-    #    plt.annotate(label, # this is the text
-    #                (x,y), # these are the coordinates to position the label
-    #                textcoords="offset points", # how to position the text
-    #                xytext=(0,10), # distance from text to points (x,y)
-    #                ha='center') # horizontal alignment can be left, right or center
-    #
-    #plt.title('Stochastic Hill Climber Fitness')
-    #plt.xlabel('Generation')
-    #plt.ylabel('Fitness')
-    #plt.savefig("img/shc_2.png")
-    #plt.show()
-    #print(min(bst))
+    print("Stochastic Hill Climber")
+    b, bst, pst = hillClimb(5, iters * params.pop, lstm_fit)
+    print("best found weights:", b)
+    
+    #saves data to file
+    obj = (b, bst, pst)
+    with open('data/SHC_DATA_0.pkl', 'wb') as output:
+        pickle.dump(obj, output)
+      
+    with open('data/SHC_DATA_0.pkl', 'rb') as pkl_file:
+        data = pickle.load(pkl_file)
+    b=data[0]
+    bst=data[1]
+    pst=data[2]
+    
+    plt.figure(figsize=(10, 6))
+    plt.scatter(np.arange(0,len(pst)), pst)
+    plt.plot(np.arange(0,len(bst)), bst)
+    plt.yscale('log')
+    
+    lasty = ""
+    for x,y in zip(np.arange(0,len(bst)), bst):
+        if y != lasty:
+            label = "{:.2f}".format(y)
+            lasty = y
+        else:
+            label = ""
+        plt.annotate(label, # this is the text
+                    (x,y), # these are the coordinates to position the label
+                    textcoords="offset points", # how to position the text
+                    xytext=(0,10), # distance from text to points (x,y)
+                    ha='center') # horizontal alignment can be left, right or center
+    
+    plt.title('Stochastic Hill Climber Fitness')
+    plt.xlabel('Generation')
+    plt.ylabel('Fitness')
+    plt.savefig("img/shc_0.png")
+    plt.show()
+    print(min(bst))
     
     
 
